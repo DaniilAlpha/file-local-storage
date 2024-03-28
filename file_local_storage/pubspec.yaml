@@ -1,0 +1,15 @@
+name: file_local_storage
+description: "A cross platform interface for storing user-generated files."
+version: 1.0.0
+
+environment:
+  sdk: ">=3.3.2 <4.0.0"
+
+dependencies:
+  file_local_storage_impl:
+    path: ../file_local_storage_impl
+
+  path_provider: ^2.1.2
+
+dev_dependencies:
+  flutter_lints: ^3.0.1

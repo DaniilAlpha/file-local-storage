@@ -1,0 +1,12 @@
+name: file_local_storage_impl
+description: An platform-specific implementation for file_local_storage package.
+version: 1.0.0
+
+environment:
+  sdk: ^3.3.2
+
+dependencies:
+  plugin_platform_interface: ^2.1.4
+
+dev_dependencies:
+  lints: ^3.0.0

@@ -1,0 +1,17 @@
+{
+    "activitusbar.views": [
+        {
+            "name": "task.upgrade",
+            "codicon": "arrow-down",
+            "tooltip": "upgrade"
+        },
+        {
+            "name": "task.clean",
+            "codicon": "trash",
+            "tooltip": "clean"
+        },
+    ],
+    "files.associations": {
+        "*.h": "c",
+    }
+}

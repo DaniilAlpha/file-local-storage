@@ -1,0 +1,123 @@
+{
+    "version": "2.0.0",
+    "presentation": {
+        "revealProblems": "onProblem",
+        "showReuseMessage": false,
+        "clear": true,
+    },
+    "tasks": [
+        /**********
+		 ** root **
+		 **********/
+        {
+            "label": "upgrade",
+            "dependsOn": [
+                "file-local-storage-upgrade",
+                "file-local-storage-impl-upgrade",
+                "example-upgrade",
+            ],
+        },
+        // clean
+        {
+            "label": "clean",
+            "dependsOn": [
+                "file-local-storage-clean",
+                "file-local-storage-impl-clean",
+                "example-clean",
+            ],
+        },
+        /************************
+		 ** file_local_storage **
+		 ************************/
+        // get
+        {
+            "label": "file-local-storage-get",
+            "type": "shell",
+            "command": "flutter pub get",
+            "options": {
+                "cwd": "file_local_storage/"
+            }
+        },
+        // upgrade
+        {
+            "label": "file-local-storage-upgrade",
+            "dependsOn": "file-local-storage-get",
+            "type": "shell",
+            "command": "flutter pub upgrade",
+            "options": {
+                "cwd": "file_local_storage/"
+            }
+        },
+        // clean
+        {
+            "label": "file-local-storage-clean",
+            "type": "shell",
+            "command": "flutter clean",
+            "options": {
+                "cwd": "file_local_storage/"
+            }
+        },
+        /*******************************************
+		 ** file_local_storage_impl **
+		 *******************************************/
+        // get
+        {
+            "label": "file-local-storage-impl-get",
+            "type": "shell",
+            "command": "flutter pub get",
+            "options": {
+                "cwd": "file_local_storage_impl/"
+            }
+        },
+        // upgrade
+        {
+            "label": "file-local-storage-impl-upgrade",
+            "dependsOn": "file-local-storage-impl-get",
+            "type": "shell",
+            "command": "flutter pub upgrade",
+            "options": {
+                "cwd": "file_local_storage_impl/"
+            }
+        },
+        // clean
+        {
+            "label": "file-local-storage-impl-clean",
+            "type": "shell",
+            "command": "flutter clean",
+            "options": {
+                "cwd": "file_local_storage_impl/"
+            }
+        },
+        /*************
+		 ** example **
+		 *************/
+        // get
+        {
+            "label": "example-get",
+            "type": "shell",
+            "command": "flutter pub get",
+            "options": {
+                "cwd": "file_local_storage/example/"
+            }
+        },
+        // upgrade
+        {
+            "label": "example-upgrade",
+            "dependsOn": "example-get",
+            "type": "shell",
+            "command": "flutter pub upgrade",
+            "options": {
+                "cwd": "file_local_storage/example/"
+            }
+        },
+        // clean
+        {
+            "label": "example-clean",
+            "type": "shell",
+            "command": "flutter clean",
+            "options": {
+                "cwd": "file_local_storage/example/"
+            }
+        },
+    ]
+}
