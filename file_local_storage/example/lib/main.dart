@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
 import 'package:file_local_storage/file_local_storage.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() => runApp(const MyApp());
 
@@ -16,7 +17,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final controller = TextEditingController();
 
-  final storage = FileLocalStorage("test_file_local_storage");
+  final storage = FileLocalStorage(
+    dirPath: getApplicationDocumentsDirectory()
+        .then((dir) => "${dir.path}/MyAppName/"),
+    indexedDBName: "MyAppName",
+  );
 
   @override
   Widget build(BuildContext context) {

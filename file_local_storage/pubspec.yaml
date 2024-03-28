@@ -1,6 +1,6 @@
 name: file_local_storage
 description: "A cross platform interface for storing user-generated files."
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/DaniilAlpha/file_local_storage/tree/master/file_local_storage
 
 environment:
@@ -8,8 +8,6 @@ environment:
 
 dependencies:
   file_local_storage_impl: ^1.0.0
-
-  path_provider: ^2.1.2
 
 dev_dependencies:
   flutter_lints: ^3.0.1

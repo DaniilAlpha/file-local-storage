@@ -7,7 +7,7 @@ import "dart:typed_data";
 import "package:file_local_storage_impl/file_local_storage_impl.dart";
 
 final class FileLocalStorageImpl extends FileLocalStorageInterface {
-  FileLocalStorageImpl({super.storagePath, required super.storageName}) {
+  FileLocalStorageImpl({super.storagePath = "", required super.storageName}) {
     if (!IdbFactory.supported) {
       throw FileLocalStorageException("IndexedDB is not supported.");
     }
