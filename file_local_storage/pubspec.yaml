@@ -1,13 +1,13 @@
 name: file_local_storage
 description: "A cross platform interface for storing user-generated files."
 version: 1.0.0
+repository: https://github.com/DaniilAlpha/file_local_storage/tree/master/file_local_storage
 
 environment:
   sdk: ">=3.3.2 <4.0.0"
 
 dependencies:
-  file_local_storage_impl:
-    path: ../file_local_storage_impl
+  file_local_storage_impl: ^1.0.0
 
   path_provider: ^2.1.2
 

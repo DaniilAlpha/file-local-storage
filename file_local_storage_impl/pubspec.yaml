@@ -1,6 +1,7 @@
 name: file_local_storage_impl
 description: An platform-specific implementation for file_local_storage package.
 version: 1.0.0
+repository: https://github.com/DaniilAlpha/file_local_storage/tree/master/file_local_storage_impl
 
 environment:
   sdk: ^3.3.2

@@ -27,8 +27,10 @@ final class FileLocalStorageImpl extends FileLocalStorageInterface {
 
     try {
       final result = await store.getObject(KeyRange.only(name));
-      if (result! is! ByteBuffer)
-        throw FileLocalStorageException("Invalid saved data.");
+      if (result is! ByteBuffer)
+        throw FileLocalStorageException(
+          result == null ? "No saved data." : "Invalid saved data.",
+        );
       return result;
     } on Exception catch (e) {
       String msg;
