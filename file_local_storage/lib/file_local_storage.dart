@@ -3,6 +3,9 @@ import "dart:typed_data";
 
 import "package:file_local_storage_impl/file_local_storage_impl.dart";
 
+export "package:file_local_storage_impl/file_local_storage_impl.dart"
+    show FileLocalStorageException;
+
 class FileLocalStorage {
   FileLocalStorage({
     required FutureOr<String> dirPath,

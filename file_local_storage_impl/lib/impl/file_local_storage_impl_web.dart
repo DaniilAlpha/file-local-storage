@@ -7,17 +7,16 @@ import "dart:typed_data";
 import "package:file_local_storage_impl/file_local_storage_impl.dart";
 
 final class FileLocalStorageImpl extends FileLocalStorageInterface {
-  FileLocalStorageImpl({super.storagePath = "", required super.storageName}) {
+  FileLocalStorageImpl({super.dirPath = "", required super.indexedDBName}) {
     if (!IdbFactory.supported) {
       throw FileLocalStorageException("IndexedDB is not supported.");
     }
   }
 
-  late final connection = window.indexedDB!.open(
-    "file_local_storage_db",
-    version: 1,
-    onUpgradeNeeded: _onUpgradeNeeded,
-  );
+  static const storageName = "file_local_storage";
+
+  late final connection = window.indexedDB!
+      .open(indexedDBName, version: 1, onUpgradeNeeded: _onUpgradeNeeded);
 
   @override
   Future<ByteBuffer> load(String name) async {
