@@ -11,7 +11,9 @@ import "package:file_local_storage/file_local_storage.dart";
 
 void main() {
   final storage = FileLocalStorage(
-    "YouAppName", // on IO platforms is the folder inside documents; on the web is the name of the IndexedDB table 
+    dirPath: getApplicationDocumentsDirectory()
+        .then((dir) => "${dir.path}/MyAppName/"),
+    indexedDBName: "MyAppName",
   );
 
   final str = "Hello world!";
