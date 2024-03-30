@@ -39,15 +39,15 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.1"
+    version: "1.0.2"
   file_local_storage_impl:
     dependency: transitive
     description:
       name: file_local_storage_impl
-      sha256: "43182058b859e9a7f713789a1615dc7155bd2168007d6ba2c66c68b6a9648278"
+      sha256: "9800687a84aae06d0166f389dbb9710b45f84f33c0d6b49c90ed1fc4026cbffb"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   flutter:
     dependency: "direct main"
     description: flutter

@@ -8,11 +8,11 @@ To use this plugin, add `file_local_storage` as a [dependency in your pubspec.ya
 
 ```dart
 import "package:file_local_storage/file_local_storage.dart";
+import "package:path_provider/path_provider.dart";
 
 void main() {
   final storage = FileLocalStorage(
-    dirPath: getApplicationDocumentsDirectory()
-        .then((dir) => "${dir.path}/MyAppName/"),
+    dirPath: getApplicationDocumentsDirectory().then((d) => "${d.path}/MyAppName/"),
     indexedDBName: "MyAppName",
   );
 
@@ -24,6 +24,10 @@ void main() {
   // loads `ByteBuffer` from previously saved location
   final loaded = String.fromCharCodes((await storage.load("file.txt")).asUint16List());
 
-  // both methods can throw `FileStorageException; the message will describe the failure
+  // deletes entry from previously saved location
+  storage.delete("file.txt");
+
+  // all methods can throw `FileStorageException`
+  // the `message` field will describe the failure
 }
 ```

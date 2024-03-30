@@ -32,16 +32,10 @@ final class FileLocalStorageImpl extends FileLocalStorageInterface {
         );
       return result;
     } on Exception catch (e) {
-      String msg;
-      try {
-        final dynamic dynE = e;
-        // ignore: avoid_dynamic_calls
-        msg = dynE.message;
-        // ignore: avoid_catching_errors
-      } on NoSuchMethodError {
-        msg = "IndexedDB getObject exception.";
-      }
-      throw FileLocalStorageException(msg);
+      throw FileLocalStorageException.fromException(
+        e,
+        "IndexedDB getObject failed.",
+      );
     }
   }
 
@@ -54,16 +48,26 @@ final class FileLocalStorageImpl extends FileLocalStorageInterface {
     try {
       await store.put(data.toJS, name);
     } on Exception catch (e) {
-      String msg;
-      try {
-        final dynamic dynE = e;
-        // ignore: avoid_dynamic_calls
-        msg = dynE.message;
-        // ignore: avoid_catching_errors
-      } on NoSuchMethodError {
-        msg = "IndexedDB put exception.";
-      }
-      throw FileLocalStorageException(msg);
+      throw FileLocalStorageException.fromException(
+        e,
+        "IndexedDB put failed.",
+      );
+    }
+  }
+
+  @override
+  Future<void> delete(String name) async {
+    final db = await connection;
+    final store =
+        db.transactionStore(storageName, "readwrite").objectStore(storageName);
+
+    try {
+      await store.delete(name);
+    } on Exception catch (e) {
+      throw FileLocalStorageException.fromException(
+        e,
+        "IndexedDB delete failed.",
+      );
     }
   }
 

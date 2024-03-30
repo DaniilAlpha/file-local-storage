@@ -15,12 +15,26 @@ abstract base class FileLocalStorageInterface {
 
   Future<void> save(String name, ByteBuffer data);
   Future<ByteBuffer> load(String name);
+  Future<void> delete(String name);
 }
 
 final class FileLocalStorageException implements Exception {
   FileLocalStorageException([this.message]);
+  FileLocalStorageException.fromException(
+      Exception? exception, String fallbackMessage) {
+    String msg;
+    try {
+      final dynamic dynException = exception;
+      // ignore: avoid_dynamic_calls
+      msg = dynException.message;
+      // ignore: avoid_catching_errors
+    } on NoSuchMethodError {
+      msg = fallbackMessage;
+    }
+    this.message = msg;
+  }
 
-  final String? message;
+  late final String? message;
 
   @override
   String toString() => message == null

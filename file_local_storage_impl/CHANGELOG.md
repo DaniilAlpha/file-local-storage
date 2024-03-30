@@ -1,3 +1,7 @@
+## 1.0.3
+
+Added an ability to delete entries.
+
 ## 1.0.2
 
 Name for the IndexedDB and directory are not passed as two different parameters.

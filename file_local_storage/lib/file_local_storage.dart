@@ -19,4 +19,5 @@ class FileLocalStorage {
 
   Future<void> save(String name, ByteBuffer data) => impl.save(name, data);
   Future<ByteBuffer> load(String name) => impl.load(name);
+  Future<void> delete(String name) => impl.delete(name);
 }

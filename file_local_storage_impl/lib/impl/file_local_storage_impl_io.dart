@@ -33,4 +33,17 @@ final class FileLocalStorageImpl extends FileLocalStorageInterface {
       throw FileLocalStorageException(e.message);
     }
   }
+
+  @override
+  Future<void> delete(String name) async {
+    final file = File("${await dirPath}/file_local_storage/$name");
+
+    if (!await file.exists()) return;
+
+    try {
+      await file.delete();
+    } on FileSystemException catch (e) {
+      throw FileLocalStorageException(e.message);
+    }
+  }
 }
