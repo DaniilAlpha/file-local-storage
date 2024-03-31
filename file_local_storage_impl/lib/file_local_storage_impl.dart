@@ -15,6 +15,10 @@ abstract base class FileLocalStorageInterface {
 
   Future<void> save(String name, ByteBuffer data);
   Future<ByteBuffer> load(String name);
+
+  Future<void> saveString(String name, String data);
+  Future<String> loadString(String name);
+
   Future<void> delete(String name);
 }
 

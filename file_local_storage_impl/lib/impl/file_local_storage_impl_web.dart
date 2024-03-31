@@ -19,62 +19,77 @@ final class FileLocalStorageImpl extends FileLocalStorageInterface {
       .open(indexedDBName, version: 1, onUpgradeNeeded: _onUpgradeNeeded);
 
   @override
-  Future<ByteBuffer> load(String name) async {
-    final db = await connection;
-    final store =
-        db.transactionStore(storageName, "readonly").objectStore(storageName);
-
-    try {
-      final result = await store.getObject(KeyRange.only(name));
-      if (result is! ByteBuffer)
-        throw FileLocalStorageException(
-          result == null ? "No saved data." : "Invalid saved data.",
-        );
-      return result;
-    } on Exception catch (e) {
-      throw FileLocalStorageException.fromException(
-        e,
-        "IndexedDB getObject failed.",
+  Future<ByteBuffer> load(String name) => _action(
+        (store) async {
+          final result = await store.getObject(KeyRange.only(name));
+          if (result is! ByteBuffer)
+            throw FileLocalStorageException(
+              result == null ? "No saved data." : "Invalid saved data.",
+            );
+          return result;
+        },
+        storeMode: "readonly",
+        fallbackErrorMessage: "IndexedDB getObject error.",
       );
-    }
-  }
 
   @override
-  Future<void> save(String name, ByteBuffer data) async {
-    final db = await connection;
-    final store =
-        db.transactionStore(storageName, "readwrite").objectStore(storageName);
-
-    try {
-      await store.put(data.toJS, name);
-    } on Exception catch (e) {
-      throw FileLocalStorageException.fromException(
-        e,
-        "IndexedDB put failed.",
+  Future<void> save(String name, ByteBuffer data) => _action(
+        (store) => store.put(data.toJS, name),
+        storeMode: "readwrite",
+        fallbackErrorMessage: "IndexedDB put error.",
       );
-    }
-  }
 
   @override
-  Future<void> delete(String name) async {
-    final db = await connection;
-    final store =
-        db.transactionStore(storageName, "readwrite").objectStore(storageName);
-
-    try {
-      await store.delete(name);
-    } on Exception catch (e) {
-      throw FileLocalStorageException.fromException(
-        e,
-        "IndexedDB delete failed.",
+  Future<String> loadString(String name) => _action(
+        (store) async {
+          final result = await store.getObject(KeyRange.only(name));
+          if (result is! String)
+            throw FileLocalStorageException(
+              result == null ? "No saved data." : "Invalid saved data.",
+            );
+          return result;
+        },
+        storeMode: "readonly",
+        fallbackErrorMessage: "IndexedDB getObject error.",
       );
-    }
-  }
+
+  @override
+  Future<void> saveString(String name, String data) => _action(
+        (store) => store.put(data.toJS, name),
+        storeMode: "readwrite",
+        fallbackErrorMessage: "IndexedDB put error.",
+      );
+
+  @override
+  Future<void> delete(String name) => _action(
+        (store) => store.delete(name),
+        storeMode: "readwrite",
+        fallbackErrorMessage: "IndexedDB delete error.",
+      );
 
   void _onUpgradeNeeded(VersionChangeEvent event) {
     final Database db = event.target.result;
     if (db.objectStoreNames?.contains(storageName) != true) {
       db.createObjectStore(storageName);
+    }
+  }
+
+  Future<T> _action<T>(
+    Future<T> Function(ObjectStore store) action, {
+    required String storeMode,
+    String? fallbackErrorMessage,
+  }) async {
+    final db = await connection;
+    final store =
+        db.transactionStore(storageName, storeMode).objectStore(storageName);
+
+    try {
+      return await action(store);
+    } on Exception catch (e) {
+      throw FileLocalStorageException.fromException(
+        e,
+        fallbackErrorMessage ?? "${e.runtimeType}",
+      );
     }
   }
 }

@@ -1,3 +1,7 @@
+## 1.0.4
+
+Added an ability to save and load string alongside with binary data.
+
 ## 1.0.3
 
 Added an ability to delete entries.

@@ -39,15 +39,15 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.2"
+    version: "1.0.4"
   file_local_storage_impl:
     dependency: transitive
     description:
       name: file_local_storage_impl
-      sha256: "9800687a84aae06d0166f389dbb9710b45f84f33c0d6b49c90ed1fc4026cbffb"
+      sha256: "1f5f062e849e6f3251cb603c34a5243ed51ce266eefb3a4b4c8d635fe0feb4dc"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.4"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -174,10 +174,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "8cb58b45c47dcb42ab3651533626161d6b67a2921917d8d429791f76972b3480"
+      sha256: "0a989dc7ca2bb51eac91e8fd00851297cfffd641aa7538b165c62637ca0eaa4a"
       url: "https://pub.dev"
     source: hosted
-    version: "5.3.0"
+    version: "5.4.0"
   xdg_directories:
     dependency: transitive
     description:

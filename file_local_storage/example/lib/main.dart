@@ -34,17 +34,19 @@ class _MyAppState extends State<MyApp> {
           TextField(controller: controller),
           ButtonBar(children: [
             ElevatedButton(
-              onPressed: () => storage.save("file.txt",
-                  Uint16List.fromList(controller.text.codeUnits).buffer),
+              onPressed: () => storage.saveString("file.txt", controller.text),
               child: const Text("SAVE"),
             ),
             ElevatedButton(
               onPressed: () async {
-                controller.text = String.fromCharCodes(
-                    (await storage.load("file.txt")).asUint16List());
+                controller.text = await storage.loadString("file.txt");
                 setState(() {});
               },
               child: const Text("LOAD"),
+            ),
+            ElevatedButton(
+              onPressed: () => storage.delete("file.txt"),
+              child: const Text("DELETE"),
             ),
           ]),
         ]),
